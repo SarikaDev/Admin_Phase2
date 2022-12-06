@@ -1,0 +1,52 @@
+export const PATHS = {
+  login: "/",
+  loginTypes: "/loginTypes",
+  password: "password",
+  face: "face",
+  fingerPrint: "fingerPrint",
+  dashboard: "/dashboard",
+  enroll: {
+    root: "/enroll/",
+    total: "/enroll/total",
+    day: "/enroll/day",
+    week: "/enroll/week",
+    month: "/enroll/month",
+    dataRange: "/enroll/date",
+  },
+  authentication: {
+    root: "/auth/",
+    total: "/auth/total",
+    day: "/auth/day",
+    week: "/auth/week",
+    month: "/auth/month",
+    dataRange: "/auth/date",
+  },
+  adjudication: {
+    root: "/adjudication/",
+    total: "/adjudication/total",
+    day: "/adjudication/day",
+    week: "/adjudication/week",
+    month: "/adjudication/month",
+    dataRange: "/adjudication/date",
+  },
+  metric: {
+    root: "/metric/",
+    reports: "/metric/reports",
+    registrations: "/metric/registrations",
+    users: "/metric/users",
+    auditTrail: "/metric/auditTrail",
+  },
+  // deviceRegistrations: {
+  //   root: "/deviceRegistrations/",
+  //   user: "/deviceRegistrations/user",
+  //   report: "/deviceRegistrations/report",
+  //   Sample: "/deviceRegistrations/Sample",
+  // },
+  userManagement: {
+    root: "/userManagement/",
+    createUser: "/userManagement/createUser",
+    updateUser: "/userManagement/updateUser",
+    userLists: "/userManagement/userLists",
+  },
+};
+export const SM_WIDTH = 1100;

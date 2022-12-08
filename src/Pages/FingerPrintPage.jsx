@@ -62,7 +62,9 @@ const FingerPrintPage = () => {
   const dispatch = useDispatch();
   const [postFinger, { isLoading, isError }] = usePostFingerMutation();
 
-  const identityNumber = useSelector(state => state.auth.identityNumber);
+  const identityNumber = useSelector(
+    state => state.authentication.identityNumber,
+  );
   const { fingerPositions } = useSelector(state => state.userDetails);
 
   const handleNext = async () => {

@@ -43,8 +43,8 @@ export const PATHS = {
   //   Sample: "/deviceRegistrations/Sample",
   // },
   userManagement: {
-    root: "/userManagement/",
-    createUser: "/userManagement/createUser",
+    root: "/dashboard/userManagement/",
+    createUser: "/dashboard/userManagement/createUser",
     updateUser: "/userManagement/updateUser",
     userLists: "/userManagement/userLists",
   },

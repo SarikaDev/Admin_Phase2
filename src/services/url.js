@@ -1,20 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { useSelector } from "react-redux";
 import { REHYDRATE } from "redux-persist";
-export const aptiwaySlice = createApi({
-  reducerPath: "aptiway",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.boamw.aptiway.com/api",
-  }),
-  prepareHeaders: (headers, { getState, endpoint }) => {
-    const user = getState().user.currentUser;
-
-    if (user && endpoint !== "refresh") {
-      headers.set("Authorization", `Bearer ${user.token.access}`);
+import moment from "moment";
+const baseQuery = fetchBaseQuery({
+  baseUrl: "https://api.boamw.aptiway.com/api",
+  credentials: "same-origin",
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState()?.authorization?.accessToken;
+    console.log("token", token);
+    if (token) {
+      headers.set("authorization", `Bearer ${token}`);
+      headers.set("Content-Type", "application/json");
     }
     return headers;
   },
-  credentials: "include", // This allows server to set cookies
+});
 
+export const aptiwaySlice = createApi({
+  reducerPath: "aptiway",
+  baseQuery,
+  credentials: "include", // This allows server to set cookies
+  tagTypes: ["Branch", "AllUsers"],
   endpoints: builder => ({
     isUserLoggedIn: builder.mutation({
       query: MobileNumber => {
@@ -28,6 +34,10 @@ export const aptiwaySlice = createApi({
         };
       },
     }),
+    getBranches: builder.query({
+      query: () => "/profile/customer/branch",
+      providesTags: ["Branch"],
+    }),
     postPassword: builder.mutation({
       query: ({ identityNumber, Password }) => {
         return {
@@ -36,6 +46,62 @@ export const aptiwaySlice = createApi({
           body: {
             credentialType: "PASSWORD",
             credential: Password,
+          },
+        };
+      },
+    }),
+    createUser: builder.mutation({
+      query: ({ MobileNumber, role, name, branch, status }) => {
+        return {
+          url: "/user",
+          method: "POST",
+          body: {
+            attributeName: "MobileNumber",
+            attributeValue: MobileNumber,
+            role: role,
+            displayName: name,
+            branchId: branch,
+            status: status,
+          },
+        };
+      },
+    }),
+    singleUser: builder.query({
+      query: ({ MobileNumber }) => {
+        return {
+          url: "",
+          method: "GET",
+          params: {
+            MobileNumber,
+          },
+        };
+      },
+    }),
+    users: builder.query({
+      query: ({
+        pageNumber,
+        pageSize,
+        fromDate,
+        toDate,
+        search,
+        selectedFilter,
+      }) => {
+        return {
+          url: "/user",
+          method: "GET",
+          params: {
+            pageNumber: pageNumber + 1,
+            ...(fromDate && {
+              fromLastUpdated: moment(fromDate).format("YYYY-MM-DD"),
+            }),
+            ...(toDate && {
+              toLastUpdated: moment(toDate).format("YYYY-MM-DD"),
+            }),
+            pageSize,
+            ...(search && {
+              [selectedFilter]:
+                selectedFilter === "mobileNumber" ? `+251${search}` : search,
+            }),
           },
         };
       },
@@ -78,4 +144,8 @@ export const {
   usePostPasswordMutation,
   usePostFaceMutation,
   usePostFingerMutation,
+  useCreateUserMutation,
+  useUsersQuery,
+  useSingelUserQuery,
+  useGetBranchesQuery,
 } = aptiwaySlice;

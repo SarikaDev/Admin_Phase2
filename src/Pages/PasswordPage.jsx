@@ -18,7 +18,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { PATHS } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
-import { setAccessToken } from "../rtk/slices/accessTokenSlice";
+import { setAccessToken } from "../rtk/slices/authorizationSlice";
 import { setUserData } from "../rtk/slices/userSlice";
 const PasswordPage = () => {
   const [postPassword, { isLoading, isError }] = usePostPasswordMutation();
@@ -26,8 +26,8 @@ const PasswordPage = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { identityNumber } = useSelector(
-    setUserDetails => setUserDetails.userDetails,
+  const identityNumber = useSelector(
+    state => state?.authentication?.identityNumber,
   );
   const Password = btoa(password);
 

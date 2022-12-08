@@ -15,13 +15,17 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
+import branchSlice from "./slices/branchSlice";
+import authorizationSlice from "./slices/authorizationSlice";
+import authenticationSlice from "./slices/authenticationSlice";
 const logger = require("redux-logger");
 
 const rootReducer = combineReducers({
   [aptiwaySlice.reducerPath]: aptiwaySlice.reducer,
   userDetails: userSlice,
-  accessToken: accessTokenSlice,
-  auth: authSlice,
+  authorization: authorizationSlice,
+  authentication: authenticationSlice,
+  branch: branchSlice,
   // authSlice: authSlice,
 });
 
@@ -35,9 +39,8 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoreActions: [FLUSH, REHYDRATE, PAUSE, PURGE, REGISTER],
-      },
+      immutableCheck: false,
+      serializableCheck: false,
     }).concat([aptiwaySlice.middleware, logger.createLogger()]),
   devTools: true,
 }); //end

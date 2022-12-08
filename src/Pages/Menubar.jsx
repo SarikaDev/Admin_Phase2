@@ -7,7 +7,11 @@ import MenuAppBar from "../components/navbar/topNavbar";
 const Menubar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Box component={Stack} gap={2}>
+    <Box
+      component={Stack}
+      gap={2}
+      sx={{ backgroundColor: "secondary.main", height: "100vh" }}
+    >
       <MenuAppBar setIsOpen={setIsOpen} />
       <Box component={Stack} flexDirection={"row"}>
         <MuiDrawer isOpen={isOpen}>

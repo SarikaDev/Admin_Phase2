@@ -35,6 +35,14 @@ const FingerPrintPage = lazy(async () => {
   const module = await import("../Pages/FingerPrintPage");
   return module;
 });
+const UserManagementPage = lazy(async () => {
+  const module = await import("../Pages/UserManagement/UserManagementPage");
+  return module;
+});
+const CreateUserPage = lazy(async () => {
+  const module = await import("../Pages/UserManagement/CreateUser");
+  return module;
+});
 
 const routes = isLoggedIn => [
   {
@@ -50,7 +58,11 @@ const routes = isLoggedIn => [
   {
     path: PATHS.dashboard,
     element: <MenuBarLayout />,
-    children: [{ path: "", element: <DashboardPage /> }],
+    children: [
+      { path: "", element: <DashboardPage /> },
+      { path: PATHS.userManagement.root, element: <UserManagementPage /> },
+      { path: PATHS.userManagement.createUser, element: <CreateUserPage /> },
+    ],
   },
   {
     path: "/",

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { CircularProgress } from "@mui/material";
 
 const RouteHandler = () => {
-  const loggedIn = useSelector(state => state.auth?.identityNumber?.length);
+  const loggedIn = useSelector(state => state.authentication.identityNumber);
   console.log("loggedIn", loggedIn);
   const routing = useRoutes(routes(!!loggedIn));
   return <Suspense fallback={<CircularProgress />}> {routing}</Suspense>;

@@ -13,8 +13,7 @@ import {
 import { PATHS } from "../utils/constants";
 
 const LoginTypes = () => {
-  // const data = useSelector(state => state.userDetails);
-  const credentials = useSelector(state => state.userDetails.credentials);
+  const credentials = useSelector(state => state.authentication.credentials);
   console.log("credentials", credentials);
 
   //   const Icons = [

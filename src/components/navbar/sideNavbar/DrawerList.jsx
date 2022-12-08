@@ -16,8 +16,11 @@ import Link from "../../common/Links";
 import PersonAddAltRoundedIcon from "@mui/icons-material/PersonAddAltRounded";
 import { useCallback } from "react";
 import { PATHS } from "../../../utils/constants";
+import { useSelector } from "react-redux";
 const DrawList = ({ setIsOpen }) => {
   const location = useLocation();
+  const displayName = useSelector(state => state.userDetails.displayName);
+  const roleName = useSelector(state => state.userDetails.roleName);
   const navItems = [
     {
       title: "Dashboard",
@@ -188,7 +191,7 @@ const DrawList = ({ setIsOpen }) => {
           }}
         />
         <Typography fontSize={{ xs: 16, md: 9, lg: 19 }} variant="body2">
-          dispyName
+          {displayName}
         </Typography>
         <Typography
           fontSize={{ xs: 12, md: 12, lg: 14 }}
@@ -196,7 +199,7 @@ const DrawList = ({ setIsOpen }) => {
           color="#343434"
           sx={{ fontWeight: "500" }}
         >
-          roleName
+          {roleName}
         </Typography>
       </Box>
       <Box sx={{ width: "100%", position: "relative" }}>

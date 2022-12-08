@@ -8,7 +8,7 @@ import { setUserDetails } from "../rtk/slices/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PATHS } from "../utils/constants";
-import { setIdentity } from "../rtk/slices/authSlice";
+import { setIdentity, setCredentials } from "../rtk/slices/authenticationSlice";
 import { toast } from "react-toastify";
 
 const LoginPage = () => {
@@ -51,6 +51,7 @@ const LoginPage = () => {
 
         dispatch(setUserDetails(response.data));
         dispatch(setIdentity({ identityNumber: response.data.identityNumber }));
+        dispatch(setCredentials({ credentials: response.data.credentials }));
         navigate(PATHS.loginTypes);
         return response;
       }

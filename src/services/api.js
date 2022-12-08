@@ -1,18 +1,17 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { setCredentials, logOut } from "../rtk/slices/authSlice";
+// import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+// import { setCredentials, logOut } from "../rtk/slices/authSlice";
 
-const baseQuery = fetchBaseQuery({
-  baseUrl: "https://api.boamw.aptiway.com/api",
-  credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
-    if (token) {
-      headers.set("Content-Type", "application/json");
-      headers.set("authorization", `Bearer ${token}`);
-    }
-    return headers;
-  },
-});
+// const baseQuery = fetchBaseQuery({
+//   baseUrl: "https://api.boamw.aptiway.com/api",
+//   credentials: "include",
+//   prepareHeaders: (headers, { getState }) => {
+//     const token = getState().auth.token;
+//     if (token) {
+//       headers.set("authorization", `Bearer ${token}`);
+//     }
+//     return headers;
+//   },
+// });
 
 // const baseQueryWithReAuth = async (args, api, extraOptions) => {
 //   let result = await baseQuery(args, api, extraOptions);
@@ -31,7 +30,7 @@ const baseQuery = fetchBaseQuery({
 //   return result;
 // };
 
-export const apiSlice = createApi({
-  baseQuery,
-  endpoints: builder => ({}),
-});
+// export const apiSlice = createApi({
+//   baseQuery,
+//   endpoints: builder => ({}),
+// });
